@@ -15,13 +15,13 @@ Configuration
 
 Avant de pouvoir exécuter l'application, vous devez effectuer les étapes de configuration suivantes :
 
-    Installez Node.js et npm (Node Package Manager) sur votre machine.
+Installez Node.js et npm (Node Package Manager) sur votre machine.
 
-    Clonez ce référentiel GitHub sur votre machine.
+Clonez ce référentiel GitHub sur votre machine.
 
-    Accédez au répertoire du projet dans votre terminal et exécutez la commande suivante pour installer les dépendances :
+Accédez au répertoire du projet dans votre terminal et exécutez la commande suivante pour installer les dépendances :
 
-npm install
+    npm install
 
 Créez un projet Firebase sur la console Firebase (https://console.firebase.google.com) et récupérez les informations de configuration Firebase (clé d'API, ID du projet, etc.).
 
@@ -31,11 +31,9 @@ Configurez les règles de sécurité Firestore pour autoriser les opérations d'
 
 Exécutez l'application en utilisant la commande suivante :
 
-sql
-
     npm start
 
-    Cela lancera le serveur de développement et vous pourrez accéder à l'application via l'URL fournie.
+Cela lancera le serveur de développement et vous pourrez accéder à l'application via l'URL fournie.
 
 Technologies utilisées
 
