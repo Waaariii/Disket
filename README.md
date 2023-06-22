@@ -9,7 +9,7 @@ Connexion : Les utilisateurs enregistrés peuvent se connecter à leur compte en
 
 Publication de contenu : Les utilisateurs peuvent créer des publications contenant du texte, des images ou les deux. Les publications sont affichées dans un flux pour que les autres utilisateurs puissent les voir.
 
-Interaction avec les publications : Les utilisateurs peuvent aimer les publications des autres utilisateurs. Le nombre de likes est affiché sur chaque publication.
+Interaction avec les publications : Les utilisateurs peuvent aimer les publications des autres utilisateurs.
 
 Configuration
 
