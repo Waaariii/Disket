@@ -3,13 +3,13 @@ APPLICATION DISKET
 Cette application est un réseau social où les utilisateurs peuvent partager des publications, interagir avec d'autres utilisateurs en aimant leurs publications et suivre leurs activités. L'application est développée en utilisant React Native et Firebase.
 Fonctionnalités
 
-    Création de compte : Les utilisateurs peuvent créer un compte en fournissant leur nom d'utilisateur, leur adresse e-mail, leur mot de passe et leur numéro de téléphone.
+Création de compte : Les utilisateurs peuvent créer un compte en fournissant leur nom d'utilisateur, leur adresse e-mail, leur mot de passe et leur numéro de téléphone.
 
-    Connexion : Les utilisateurs enregistrés peuvent se connecter à leur compte en utilisant leur adresse e-mail et leur mot de passe.
+Connexion : Les utilisateurs enregistrés peuvent se connecter à leur compte en utilisant leur adresse e-mail et leur mot de passe.
 
-    Publication de contenu : Les utilisateurs peuvent créer des publications contenant du texte, des images ou les deux. Les publications sont affichées dans un flux pour que les autres utilisateurs puissent les voir.
+Publication de contenu : Les utilisateurs peuvent créer des publications contenant du texte, des images ou les deux. Les publications sont affichées dans un flux pour que les autres utilisateurs puissent les voir.
 
-    Interaction avec les publications : Les utilisateurs peuvent aimer les publications des autres utilisateurs. Le nombre de likes est affiché sur chaque publication.
+Interaction avec les publications : Les utilisateurs peuvent aimer les publications des autres utilisateurs. Le nombre de likes est affiché sur chaque publication.
 
 Configuration
 
