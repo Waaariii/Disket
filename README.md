@@ -37,7 +37,7 @@ Cela lancera le serveur de développement et vous pourrez accéder à l'applicat
 
 Technologies utilisées
 
-    React Native
-    Firebase Authentication
-    Firebase Firestore
-    Firebase Storage
+React Native
+Firebase Authentication
+Firebase Firestore
+Firebase Storage
