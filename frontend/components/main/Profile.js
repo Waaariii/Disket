@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image, FlatList, Button } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, TouchableOpacity } from 'react-native';
 import firebase from '../../config/firebase';
 import { connect } from 'react-redux';
 
@@ -93,27 +93,35 @@ function Profile(props) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerInfo}>
-        <Text>{user.name}</Text>
-        <Text>{user.email}</Text>
-
-        {/* Affiche le bouton "Follow" ou "Unfollow" en fonction de l'état du suivi */}
+      <View style={styles.buttonContainer}>
         {props.route.params.uid !== firebase.auth().currentUser.uid ? (
-          <View>
+          <>
             {following ? (
-              <Button title="Following" onPress={() => onUnfollow()} />
+              <TouchableOpacity style={styles.followButton} onPress={() => onUnfollow()}>
+                <Text style={styles.buttonText}>Suivi</Text>
+              </TouchableOpacity>
             ) : (
-              <Button title="Follow" onPress={() => onFollow()} />
+              <TouchableOpacity style={styles.followButton} onPress={() => onFollow()}>
+                <Text style={styles.buttonText}>Suivre</Text>
+              </TouchableOpacity>
             )}
-          </View>
+          </>
         ) : (
-          // Affiche le bouton "Logout" si le profil affiché est celui de l'utilisateur actuel
-          <Button title="Logout" onPress={() => onLogout()} />
+          <TouchableOpacity style={styles.logoutButton} onPress={() => onLogout()}>
+            <Text style={styles.buttonText}>Déconnexion</Text>
+          </TouchableOpacity>
         )}
+
+        <TouchableOpacity style={styles.chatButton} onPress={() => onChat()}>
+          <Text style={styles.buttonTextMessenger}>Discussion</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.containerInfo}>
+        <Text style={styles.nameText}>{user.name}</Text>
       </View>
 
       <View style={styles.containerGallery}>
-        {/* Affiche les publications de l'utilisateur */}
         <FlatList
           numColumns={3}
           horizontal={false}
@@ -132,7 +140,13 @@ function Profile(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
+    backgroundColor: 'black',
+    paddingTop: 40,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start', // Alignement à gauche
+    justifyContent: 'space-evenly', // Alignement en haut
   },
   containerInfo: {
     margin: 20,
@@ -147,6 +161,49 @@ const styles = StyleSheet.create({
     flex: 1,
     aspectRatio: 1 / 1,
   },
+  followButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    borderWidth:3,
+    borderColor: '#FFCC00',
+    paddingVertical: 20,
+    marginTop: 10,
+    width: 150,
+  },
+  logoutButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    borderWidth:3,
+    borderColor: '#FFCC00',
+    paddingVertical: 20,
+    marginTop: 10,
+    width: 150,
+  },
+  chatButton: {
+    backgroundColor: '#FFCC00',
+    borderRadius: 10,
+    borderWidth:3,
+    borderColor: '#FFCC00',
+    paddingVertical: 20,
+    marginTop: 10,
+    width: 150,
+  },
+  buttonText: {
+    color: '#FFCC00',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  buttonTextMessenger: {
+    color: 'black',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  nameText: {
+    color: '#FFCC00',
+    fontWeight: 'bold',
+    fontSize: 30,
+    textAlign: 'center',
+  }
 });
 
 // Fonction qui extrait les données du store Redux et les passe en tant que props au composant Profile

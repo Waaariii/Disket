@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Button, TextInput } from 'react-native';
+import { View, Text, FlatList, Button, TextInput, StyleSheet } from 'react-native';
 import firebase from '../../config/firebase';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -27,6 +27,7 @@ function Comment(props) {
         } else {
           comments[i].user = user;
         }
+        console.log(comments[i])
       }
       setComments(comments);
     }
@@ -69,28 +70,49 @@ function Comment(props) {
   };
 
   return (
-    <View>
-      <FlatList
+    <View style={styles.container}>
+       <FlatList
         numColumns={1}
         horizontal={false}
         data={comments}
         renderItem={({ item }) => (
           <View>
-            {item.user !== undefined ? <Text>{item.user.name}</Text> : null}
-            <Text>{item.text}</Text>
+            {item.user !== undefined ? (
+              <Text style={styles.username}>{item.user.name}</Text>
+            ) : null}
+            <Text style={styles.comment}>{item.text}</Text>
           </View>
         )}
       />
       <View>
         <TextInput
-          placeholder="Comment..."
+          placeholder="Commenter..."
           onChangeText={(text) => setText(text)}
+          placeholderTextColor="#FFCC00"
+          color="white"
         />
-        <Button onPress={() => onCommentSend()} title="Send" />
+        <Button onPress={() => onCommentSend()} title="Envoyez" />
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    padding: 10,
+  },
+  username: {
+    color: '#FFCC00',
+    marginBottom: 5,
+  },
+  comment: {
+    color: 'white',
+    marginBottom: 10,
+  },
+});
+
 
 // Fonction qui extrait les données du store Redux et les passe en tant que props au composant Comment
 const mapStateToProps = (store) => ({

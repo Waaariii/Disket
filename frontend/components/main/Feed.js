@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Image, FlatList, Button } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 import firebase from '../../config/firebase';
 
@@ -56,27 +57,30 @@ function Feed(props) {
           data={posts}
           renderItem={({ item }) => (
             <View style={styles.containerImage}>
-              <Text style={styles.container}>{item.user.name}</Text>
+              <Text style={styles.username}>{item.user.name}</Text>
               <Image style={styles.image} source={{ uri: item.downloadURL }} />
               {item.currentUserLike ? (
                 <Button
+                  style={styles.button}
                   title="Dislike"
                   onPress={() => onDislikePress(item.user.uid, item.id)}
                 />
               ) : (
                 <Button
+                  style={styles.button}
                   title="Like"
                   onPress={() => onLikePress(item.user.uid, item.id)}
                 />
               )}
               <Text
+                style={styles.comments}
                 onPress={() =>
                   props.navigation.navigate('Comment', {
                     postId: item.id,
                     uid: item.user.uid,
                   })
                 }>
-                View Comments...
+                Voir les commentaires...
               </Text>
             </View>
           )}
@@ -89,6 +93,8 @@ function Feed(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#000000',
+    paddingTop: 40,
   },
   containerInfo: {
     margin: 20,
@@ -101,7 +107,25 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    aspectRatio: 1 / 1,
+    aspectRatio: 3 / 4,
+    marginHorizontal: 30,
+  },
+  username: {
+    color: '#FFCC00',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginLeft: 30,
+  },
+  comments: {
+    color: '#FFCC00',
+    fontSize: 10,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    marginLeft: 30,
+  },
+  button: {
+    color: '#FFCC00',
   },
 });
 

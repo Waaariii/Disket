@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 
 // Importation de Firebase
 import firebase from './config/firebase';
@@ -40,6 +41,7 @@ export class App extends Component {
     }    
   }
 
+
   componentDidMount(){
     // Écouteur d'événement pour l'état de l'authentification Firebase
     firebase.auth().onAuthStateChanged((user) => {
@@ -60,6 +62,14 @@ export class App extends Component {
   }
 
   render() {
+    const myNavigationTheme = {
+      ...DefaultTheme,
+      colors: {
+        ...DefaultTheme.colors,
+        notification: 'rgba(255, 255, 255, 0.5)',
+        secondaryContainer: 'transparent',
+      },
+    };
     const { loggedIn, loaded } = this.state;
     if(!loaded){
       // Affichage de l'écran de chargement si le chargement n'est pas terminé
@@ -83,16 +93,18 @@ export class App extends Component {
 
     // Affichage de l'application principale si l'utilisateur est connecté
     return (
+      <PaperProvider theme={myNavigationTheme}>
       <Provider store={store}>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Main">
-            <Stack.Screen name="Main" component={MainScreen}/>
-            <Stack.Screen name="Add" component={AddScreen} navigation={this.props.navigation} />
-            <Stack.Screen name="Save" component={SaveScreen} navigation={this.props.navigation}/>
-            <Stack.Screen name="Comment" component={CommentScreen} navigation={this.props.navigation}/>
+          <Stack.Navigator initialRouteName="Main" >
+            <Stack.Screen name="Main" component={MainScreen} options={{ headerShown : false}}/>
+            <Stack.Screen name="Add" component={AddScreen} navigation={this.props.navigation}/>
+            <Stack.Screen name="Save" component={SaveScreen} navigation={this.props.navigation} />
+            <Stack.Screen name="Comment" component={CommentScreen} navigation={this.props.navigation} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
+      </PaperProvider>
     );
   }
 }

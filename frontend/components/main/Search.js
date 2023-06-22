@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, TouchableOpacity, StyleSheet, placeholderTextColor } from 'react-native';
 import firebase from '../../config/firebase';
 require('firebase/firestore');
 
 export default function Search(props) {
   const [users, setUsers] = useState([]);
 
-  /**
-   * Fonction pour récupérer les utilisateurs correspondant à la recherche.
-   * @param {string} search - Terme de recherche saisi par l'utilisateur.
-   */
   const fetchUsers = (search) => {
     firebase
       .firestore()
       .collection('users')
-      .where('name', '>=', search) // Effectue une recherche sur le champ 'name' avec la valeur saisie.
+      .where('name', '>=', search)
       .get()
       .then((snapshot) => {
         let users = snapshot.docs.map((doc) => {
@@ -22,15 +18,17 @@ export default function Search(props) {
           const id = doc.id;
           return { id, ...data };
         });
-        setUsers(users); // Met à jour la liste des utilisateurs avec les résultats de la recherche.
+        setUsers(users);
       });
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TextInput
-        placeholder="Chercher"
+        placeholder="Chercher..."
         onChangeText={(search) => fetchUsers(search)}
+        style={styles.input}
+        placeholderTextColor="#FFCC00"
       />
       <FlatList
         numColumns={1}
@@ -39,11 +37,35 @@ export default function Search(props) {
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => props.navigation.navigate('Profile', { uid: item.id })}
+            style={styles.itemContainer}
           >
-            <Text>{item.name}</Text>
+            <Text style={styles.itemText}>{item.name}</Text>
           </TouchableOpacity>
         )}
       />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000000',
+    paddingTop: 50,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#FFCC00',
+    color: '#FFCC00',
+    marginHorizontal : 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  },
+  itemContainer: {
+    marginVertical: 10,
+    marginLeft: 20,
+  },
+  itemText: {
+    color: '#FFCC00',
+  },
+});
